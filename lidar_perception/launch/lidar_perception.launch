@@ -1,0 +1,11 @@
+<launch>
+    <param name="/use_sim_time" value="true" />
+    <node pkg="tf" type="static_transform_publisher" name="lidar2car"  args="0.0 0.0 0 0.0 0.0 0.0 /vehicle /velodyne 10" />
+
+    <!--<node pkg="lidar_perception" type="lidar_perception_node" name="lidar_perception" output="screen" launch-prefix="gdb \-\-args" >-->
+    <node pkg="lidar_perception" type="lidar_perception_node" name="lidar_perception_node1" output="screen">
+            <rosparam file="$(find lidar_perception)/params/lidar_perception.yaml" command="load"/>
+    </node>
+
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find lidar_perception)/rviz/lidar_perception.rviz"/>
+</launch>
